@@ -1,0 +1,20 @@
+{
+  "enabled": true,
+  "features_dir": "docs/features",
+  "handoffs_dir": ".memory/handoffs",
+  "code_paths": ["src"],
+  "code_exempt": ["__init__.py", "conftest.py", "/migrations/", "/tests/", "/test/", "__tests__", ".config.", ".d.ts"],
+  "test_paths": ["tests"],
+  "boundaries": [
+    {
+      "name": "Pure domain",
+      "guarded_paths": ["src/domain"],
+      "extensions": [".py"],
+      "forbidden": [
+        { "pattern": "^\\s*(from|import)\\s+(requests|httpx|sqlalchemy|redis)\\b", "reason": "the domain layer must not perform I/O" },
+        { "pattern": "^\\s*(from|import)\\s+\\S*\\b(adapters|infrastructure)\\b", "reason": "the domain layer must not depend on adapters" }
+      ],
+      "fix": "Move the I/O into an adapter and pass plain data into the domain. If the domain needs a new concept, add it to docs/foundation/03-domain-model.md first."
+    }
+  ]
+}
