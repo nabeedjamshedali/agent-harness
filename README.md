@@ -199,3 +199,9 @@ keeps the whole build disciplined.
 The methodology adapts the "Missions" architecture described by Factory: an orchestrator,
 workers and validators; validation contracts written before implementation; structured handoffs;
 and serial execution.
+
+---
+
+## License
+
+[MIT](LICENSE)
